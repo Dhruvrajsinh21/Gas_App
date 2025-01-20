@@ -1,6 +1,6 @@
 # Gas Utility Company Service Management
 
-This is a Django application designed to provide consumer services for gas utilities. The application allows customers to submit service requests, track the status of their requests, and view their account information. Additionally, it provides customer support representatives with tools to manage service requests and provide support to customers.
+This is a Django application designed to provide consumer services for gas utilities and also as mentioned in the problem statement we are facing high volume request so I have used **Celery-Redis** for scaling and managing that. The application allows customers to submit service requests, track the status of their requests, and view their account information. Additionally, it provides customer support representatives with tools to manage service requests and provide support to customers.
 
 ---
 
@@ -10,6 +10,8 @@ This is a Django application designed to provide consumer services for gas utili
 - **Submit Service Requests**: Customers can submit various types of service requests such as installation, maintenance, or repair.
 - **Track Service Requests**: Customers can track the status of their requests, including the submission time and resolution time.
 - **Task Management**: Celery is integrated for managing service request updates asynchronously.
+  ![image](https://github.com/user-attachments/assets/00985504-5572-49bc-8feb-83d637726b5b)
+
 - **Admin Panel**: Allows customer support representatives to manage and update service requests.
 
 ---
