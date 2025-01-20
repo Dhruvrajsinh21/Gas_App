@@ -1,0 +1,37 @@
+<h1>Dashboard</h1>
+
+<!-- Button to create a new service request -->
+<a href="{% url 'create_request' %}" class="btn-create-request">Create New Request</a>
+
+<!-- Table to display service requests -->
+<table border="1" cellpadding="10" cellspacing="0" class="service-requests-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Customer Name</th>
+            <th>Request Type</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in service_requests %}
+        <tr>
+            <td>{{ request.id }}</td>
+            <td>{{ request.user.username }}</td>
+            <td>{{ request.type_of_service }}</td>
+            <td>{{ request.status }}</td>
+            <td>{{ request.created_at }}</td>
+            <td>
+                <a href="{% url 'view_request' request.id %}" class="btn-view">View</a>
+                <a href="{% url 'edit_request' request.id %}" class="btn-edit">Edit</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No service requests found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

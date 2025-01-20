@@ -1,0 +1,10 @@
+<!-- service_request_detail.html -->
+<h1>Service Request Details</h1>
+
+<p><strong>Request ID:</strong> {{ service_request.id }}</p>
+<p><strong>Status:</strong> {{ service_request.status }}</p>
+<p><strong>Request Type:</strong> {{ service_request.type_of_service }}</p>
+<p><strong>Customer Name:</strong> {{ service_request.user.username }}</p>
+<!-- Add more fields as needed -->
+
+<a href="/dashboard/">Back to Dashboard</a>
