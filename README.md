@@ -34,6 +34,7 @@ Follow these steps to set up the project in your local environment.
 ```bash
 git clone <repository_url>
 cd Gas_App
+cd gasapp
 ```
 
 ### Step 2: Create a Virtual Environment
