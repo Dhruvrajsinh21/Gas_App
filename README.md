@@ -36,7 +36,6 @@ Follow these steps to set up the project in your local environment.
 ```bash
 git clone <repository_url>
 cd Gas_App
-cd gasapp
 ```
 
 ### Step 2: Create a Virtual Environment
@@ -63,6 +62,7 @@ Install the required Python packages using requirements.txt:
 
 ```bash
 pip install -r requirements.txt
+cd gasapp
 ```
 
 ### Step 4: Install Redis
@@ -71,20 +71,13 @@ Since Celery requires a message broker, we use Redis in this project.
 Windows: Follow the instructions at Redis Windows.
 Mac: You can install Redis using Homebrew:
 
-``` bash
-brew install redis
-```
-Linux: Install Redis via apt:
-
-``` bash
-sudo apt-get install redis-server
-```
-
 Start the Redis server:
 
 ``` bash
-redis-server
+docker run --name redis -p 6379:6379 -d redis:alpine
+# For running this command you should have docker desktop install.
 ```
+
 ### Step 5: Apply Migrations
 Apply the necessary migrations to set up the database:
 
@@ -104,7 +97,7 @@ Visit http://127.0.0.1:8000/ in your browser to access the application.
 To process tasks asynchronously with Celery, start the Celery worker in a new terminal window:
 
 ```bash
-celery -A gasapp worker --loglevel=info
+celery -A gasapp worker --loglevel=info --pool=solo
 ```
 
 Directory Structure
@@ -112,22 +105,25 @@ The structure of the project is as follows:
 
 ```graphql
 Gas_App/
-    manage.py                    # Django manage script
+    manage.py                    
     gasapp/                       
-        __init__.py
-        apis/                     # API views and related files
+        apis/                     
             __init__.py
-            views.py              # API views for signup, service requests, etc.
-            serializers.py        # Serializers for API data
+            views.py              
+            serializers.py        
             tasks.py              # Celery tasks for background processing
+            .....
         gasapp/                    
             __init__.py
             settings.py           # Django settings
             urls.py               # URLs for routing
-        templates/                 # HTML templates (login, signup, etc.)
-            signup.html           # Signup page template
-            index.html            # Dashboard after login
-        static/                    # Static files (CSS, JS)
+            .....
+        templates/                # HTML templates (login, signup, etc.)
+            signup.html           
+            home.html
+            login.html
+            ...         
+        static/                   # Static files (CSS, JS)
 ```
         
 ### Usage
@@ -141,7 +137,7 @@ Celery is used for asynchronous task processing, such as updating the service re
 ### To start the Celery worker:
 
 ```bash
-celery -A gasapp worker --loglevel=info
+celery -A gasapp worker --loglevel=info --pool=solo
 ```
 
 
