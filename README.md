@@ -1,6 +1,6 @@
 # Gas Utility Company Service Management
 
-This is a Django application designed to provide consumer services for gas utilities and also as mentioned in the problem statement we are facing high volume request so I have used **Celery-Redis** for scaling and managing that. The application allows customers to submit service requests, track the status of their requests, and view their account information. Additionally, it provides customer support representatives with tools to manage service requests and provide support to customers.
+This Django application provides consumer services for gas utilities. It allows customers to submit service requests, track their status, and view account information. Due to **high request volume**, **Celery-Redis** is used for scaling and managing tasks efficiently. Customer support representatives can also manage service requests and assist customers.
 
 ---
 
@@ -12,6 +12,7 @@ This is a Django application designed to provide consumer services for gas utili
 - **Admin Panel**: Admins or customer support representatives can manage service requests and update their statuses.
 - **Celery Integration**:Celery is used for asynchronous task processing, such as updating the service request statuses in the background. To ensure that Celery works, make sure the Redis server is running 
   before starting the Celery worker.
+  
   ![image](https://github.com/user-attachments/assets/00985504-5572-49bc-8feb-83d637726b5b)
   
 ---
