@@ -82,6 +82,7 @@ docker run --name redis -p 6379:6379 -d redis:alpine
 Apply the necessary migrations to set up the database:
 
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
 
