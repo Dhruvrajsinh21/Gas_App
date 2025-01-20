@@ -26,9 +26,7 @@ Photos of Django Application:
 ##CeleryWorking
 ![image](https://github.com/user-attachments/assets/5b40b8f6-9918-497a-bf19-af5ec0893e5e)
 
-## Prerequisites
-
-Before you begin, ensure that you have the following installed on your local machine:
+## General requirements:
 
 - **Python 3.x**
 - **Django 5.x**
