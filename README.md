@@ -4,6 +4,20 @@ This is a Django application designed to provide consumer services for gas utili
 
 ---
 
+## Features
+
+**Sign up/Login**: The application opens to the login or signup page. Users must create an account or log in before they can interact with the service request system.
+**Create Service Request**: After logging in, users can create a service request for issues like installation, maintenance, etc.
+**Track Service Request**: Users can track the status of their service requests, including their submission time and resolution time.
+**Admin Panel**: Admins or customer support representatives can manage service requests and update their statuses.
+**Celery Integration**
+Celery is used for asynchronous task processing, such as updating the service request statuses in the background. To ensure that Celery works, make sure the Redis server is running before starting the Celery worker.
+  ![image](https://github.com/user-attachments/assets/00985504-5572-49bc-8feb-83d637726b5b)
+
+- **Admin Panel**: Allows customer support representatives to manage and update service requests.
+  
+---
+
 Photos of Django Application:
 
 ![image](https://github.com/user-attachments/assets/94b3eea4-9db3-4e78-9e58-8a3ed6130220)
@@ -13,18 +27,6 @@ Photos of Django Application:
 ![image](https://github.com/user-attachments/assets/000180b7-565c-418b-b00e-d8937d31e416)
 ##CeleryWorking
 ![image](https://github.com/user-attachments/assets/5b40b8f6-9918-497a-bf19-af5ec0893e5e)
-
-## Features
-
-- **Customer Login & Signup**: Users can sign up and log in to their accounts.
-- **Submit Service Requests**: Customers can submit various types of service requests such as installation, maintenance, or repair.
-- **Track Service Requests**: Customers can track the status of their requests, including the submission time and resolution time.
-- **Task Management**: Celery is integrated for managing service request updates asynchronously.
-  ![image](https://github.com/user-attachments/assets/00985504-5572-49bc-8feb-83d637726b5b)
-
-- **Admin Panel**: Allows customer support representatives to manage and update service requests.
-
----
 
 ## Prerequisites
 
@@ -136,37 +138,3 @@ Gas_App/
             ...         
         static/                  
 ```
-        
-### Usage
-**Sign up/Login**: The application opens to the login or signup page. Users must create an account or log in before they can interact with the service request system.
-**Create Service Request**: After logging in, users can create a service request for issues like installation, maintenance, etc.
-**Track Service Request**: Users can track the status of their service requests, including their submission time and resolution time.
-**Admin Panel**: Admins or customer support representatives can manage service requests and update their statuses.
-**Celery Integration**
-Celery is used for asynchronous task processing, such as updating the service request statuses in the background. To ensure that Celery works, make sure the Redis server is running before starting the Celery worker.
-
-### To start the Celery worker:
-
-```bash
-celery -A gasapp worker --loglevel=info --pool=solo
-```
-
-
-Acknowledgements
-Django: For the web framework.
-Celery: For asynchronous task management.
-Redis: For message brokering.
-
-Photos of Django Application:
-
-![image](https://github.com/user-attachments/assets/94b3eea4-9db3-4e78-9e58-8a3ed6130220)
-![image](https://github.com/user-attachments/assets/c8eb6c3b-a771-4a92-89f1-83ccd84d99a6)
-![image](https://github.com/user-attachments/assets/5bd9da29-f6e1-4ce3-9583-66c1c3d0bd64)
-![image](https://github.com/user-attachments/assets/3de17f5d-7057-4d4b-86a1-d26e382d23af)
-![image](https://github.com/user-attachments/assets/000180b7-565c-418b-b00e-d8937d31e416)
-##CeleryWorking
-![image](https://github.com/user-attachments/assets/5b40b8f6-9918-497a-bf19-af5ec0893e5e)
-
-
-
-
