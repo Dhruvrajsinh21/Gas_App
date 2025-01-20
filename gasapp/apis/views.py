@@ -3,14 +3,13 @@ from rest_framework import generics, permissions
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .models import ServiceRequest, CustomUser
-from .serializers import ServiceRequestSerializer
 from .tasks import update_request_status
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import ServiceRequest
 from .forms import ServiceRequestForm 
 from django.views import View
 
-# Frontend views
+
 class HomeView(generics.GenericAPIView):
     def get(self, request):
         return render(request, 'home.html')
@@ -71,12 +70,9 @@ class SignupView(generics.GenericAPIView):
 
 class DashboardView(generics.GenericAPIView):
     def get(self, request):
-        # Fetch service requests related to the logged-in user
         service_requests = ServiceRequest.objects.filter(user=request.user)
         return render(request, 'dashboard.html', {'service_requests': service_requests})
 
-
-# API views
 class ServiceRequestCreateView(generics.GenericAPIView):
     def get(self, request):
         form = ServiceRequestForm()
@@ -86,13 +82,11 @@ class ServiceRequestCreateView(generics.GenericAPIView):
         form = ServiceRequestForm(request.POST)
         if form.is_valid():
             service_request = form.save(commit=False)
-            service_request.user = request.user  # Assign the logged-in user
+            service_request.user = request.user
             service_request.save()
-
-            # Trigger the Celery task to update request status to 'In Progress'
             update_request_status.delay(service_request.id)
 
-            return redirect('/dashboard/')  # Redirect to dashboard after successful creation
+            return redirect('/dashboard/')
         return render(request, 'create_request.html', {'form': form})
 
 
@@ -108,18 +102,14 @@ class ServiceRequestEditView(generics.GenericAPIView):
         if form.is_valid():
             form.save()
 
-            # Trigger the Celery task to update request status after editing (if needed)
+            # Celery Task
             update_request_status.delay(service_request.id)
 
-            return redirect('/dashboard/')  # Redirect to dashboard after successful update
+            return redirect('/dashboard/')
         return render(request, 'edit_request.html', {'form': form, 'service_request': service_request})
 
 
 class ServiceRequestDetailView(generics.GenericAPIView):
     def get(self, request, pk):
         service_request = get_object_or_404(ServiceRequest, pk=pk, user=request.user)
-
-        # Optionally trigger the task when viewing the service request details
-        # update_request_status.delay(service_request.id)
-
         return render(request, 'service_request_detail.html', {'service_request': service_request})
