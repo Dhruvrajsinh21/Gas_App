@@ -155,6 +155,9 @@ Photos of Django Application:
 ![image](https://github.com/user-attachments/assets/5bd9da29-f6e1-4ce3-9583-66c1c3d0bd64)
 ![image](https://github.com/user-attachments/assets/3de17f5d-7057-4d4b-86a1-d26e382d23af)
 ![image](https://github.com/user-attachments/assets/000180b7-565c-418b-b00e-d8937d31e416)
+##CeleryWorking
+![Uploading image.png…]()
+
 
 
 
