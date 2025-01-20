@@ -4,6 +4,16 @@ This is a Django application designed to provide consumer services for gas utili
 
 ---
 
+Photos of Django Application:
+
+![image](https://github.com/user-attachments/assets/94b3eea4-9db3-4e78-9e58-8a3ed6130220)
+![image](https://github.com/user-attachments/assets/c8eb6c3b-a771-4a92-89f1-83ccd84d99a6)
+![image](https://github.com/user-attachments/assets/5bd9da29-f6e1-4ce3-9583-66c1c3d0bd64)
+![image](https://github.com/user-attachments/assets/3de17f5d-7057-4d4b-86a1-d26e382d23af)
+![image](https://github.com/user-attachments/assets/000180b7-565c-418b-b00e-d8937d31e416)
+##CeleryWorking
+![image](https://github.com/user-attachments/assets/5b40b8f6-9918-497a-bf19-af5ec0893e5e)
+
 ## Features
 
 - **Customer Login & Signup**: Users can sign up and log in to their accounts.
@@ -116,15 +126,15 @@ Gas_App/
             .....
         gasapp/                    
             __init__.py
-            settings.py           # Django settings
-            urls.py               # URLs for routing
+            settings.py           
+            urls.py               
             .....
-        templates/                # HTML templates (login, signup, etc.)
+        templates/                
             signup.html           
             home.html
             login.html
             ...         
-        static/                   # Static files (CSS, JS)
+        static/                  
 ```
         
 ### Usage
