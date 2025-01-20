@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Track Your Service Requests</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Type of Service</th>
+            <th>Status</th>
+            <th>Details</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in object_list %}
+        <tr>
+            <td>{{ request.id }}</td>
+            <td>{{ request.type_of_service }}</td>
+            <td>{{ request.status }}</td>
+            <td>{{ request.details }}</td>
+            <td>{{ request.created_at }}</td>
+            <td>{{ request.updated_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

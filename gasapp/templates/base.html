@@ -1,0 +1,12 @@
+<nav>
+    <ul>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'create-service' %}">Create Service Request</a></li>
+            <li><a href="{% url 'track-requests' %}">Track Requests</a></li>
+            
+        {% else %}
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
+        {% endif %}
+    </ul>
+</nav>
