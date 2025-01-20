@@ -18,30 +18,24 @@ class HomeView(generics.GenericAPIView):
 
 class LoginView(View):
     def get(self, request):
-        # Render the login page when accessed with GET request
         return render(request, 'login.html')
 
     def post(self, request):
-        # Handle the login form submission when accessed with POST request
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        print(f"Received username: {username}, password: {password}")  # Debugging line
-
         if not username or not password:
             messages.error(request, "Username and Password are required.")
-            return render(request, 'login.html')  # Return to login page with error message
+            return render(request, 'login.html')
 
-        # Check if the user exists in the database
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            # Log the user in if the credentials are correct
             login(request, user)
-            return redirect('/dashboard/')  # Redirect to the dashboard after successful login
+            return redirect('/dashboard/')
         else:
             messages.error(request, "Invalid credentials. Please try again.")
-            return render(request, 'login.html')  # Return to login page with error message
+            return render(request, 'login.html')
 
 
 class SignupView(generics.GenericAPIView):
@@ -68,9 +62,8 @@ class SignupView(generics.GenericAPIView):
         try:
             user = CustomUser.objects.create_user(username=username, email=email, password=password)
             user.save()
-
             messages.success(request, "Account created successfully! You can now log in.")
-            return redirect('/login/')  # Redirect to login page after successful signup
+            return redirect('/login/')
         except Exception as e:
             messages.error(request, f"Error occurred: {str(e)}")
             return render(request, 'signup.html')
@@ -80,7 +73,6 @@ class DashboardView(generics.GenericAPIView):
     def get(self, request):
         # Fetch service requests related to the logged-in user
         service_requests = ServiceRequest.objects.filter(user=request.user)
-        
         return render(request, 'dashboard.html', {'service_requests': service_requests})
 
 
@@ -96,11 +88,14 @@ class ServiceRequestCreateView(generics.GenericAPIView):
             service_request = form.save(commit=False)
             service_request.user = request.user  # Assign the logged-in user
             service_request.save()
+
+            # Trigger the Celery task to update request status to 'In Progress'
+            update_request_status.delay(service_request.id)
+
             return redirect('/dashboard/')  # Redirect to dashboard after successful creation
         return render(request, 'create_request.html', {'form': form})
 
 
-# Edit Request View
 class ServiceRequestEditView(generics.GenericAPIView):
     def get(self, request, pk):
         service_request = get_object_or_404(ServiceRequest, pk=pk, user=request.user)
@@ -112,13 +107,19 @@ class ServiceRequestEditView(generics.GenericAPIView):
         form = ServiceRequestForm(request.POST, instance=service_request)
         if form.is_valid():
             form.save()
+
+            # Trigger the Celery task to update request status after editing (if needed)
+            update_request_status.delay(service_request.id)
+
             return redirect('/dashboard/')  # Redirect to dashboard after successful update
         return render(request, 'edit_request.html', {'form': form, 'service_request': service_request})
-    
+
+
 class ServiceRequestDetailView(generics.GenericAPIView):
     def get(self, request, pk):
-        # Get the service request by primary key (pk)
         service_request = get_object_or_404(ServiceRequest, pk=pk, user=request.user)
 
-        # Render the detail view template with the service request object
+        # Optionally trigger the task when viewing the service request details
+        # update_request_status.delay(service_request.id)
+
         return render(request, 'service_request_detail.html', {'service_request': service_request})
