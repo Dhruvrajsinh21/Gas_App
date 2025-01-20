@@ -6,15 +6,13 @@ This is a Django application designed to provide consumer services for gas utili
 
 ## Features
 
-**Sign up/Login**: The application opens to the login or signup page. Users must create an account or log in before they can interact with the service request system.
-**Create Service Request**: After logging in, users can create a service request for issues like installation, maintenance, etc.
-**Track Service Request**: Users can track the status of their service requests, including their submission time and resolution time.
-**Admin Panel**: Admins or customer support representatives can manage service requests and update their statuses.
-**Celery Integration**
-Celery is used for asynchronous task processing, such as updating the service request statuses in the background. To ensure that Celery works, make sure the Redis server is running before starting the Celery worker.
+- **Sign up/Login**: The application opens to the login or signup page. Users must create an account or log in before they can interact with the service request system.
+- **Create Service Request**: After logging in, users can create a service request for issues like installation, maintenance, etc.
+- **Track Service Request**: Users can track the status of their service requests, including their submission time and resolution time.
+- **Admin Panel**: Admins or customer support representatives can manage service requests and update their statuses.
+- **Celery Integration**:Celery is used for asynchronous task processing, such as updating the service request statuses in the background. To ensure that Celery works, make sure the Redis server is running 
+  before starting the Celery worker.
   ![image](https://github.com/user-attachments/assets/00985504-5572-49bc-8feb-83d637726b5b)
-
-- **Admin Panel**: Allows customer support representatives to manage and update service requests.
   
 ---
 
